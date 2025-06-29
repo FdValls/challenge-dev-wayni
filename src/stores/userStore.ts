@@ -7,18 +7,15 @@ export const useUserStore = create<UserStateProps>()(
     persist(
         (set) => ({
             currentUser: null,
+            selectedContact: null,
             users: [],
             isHydrated: false,
             isAuthenticated: false,
-
             setCurrentUser: (user) => set({ currentUser: user }),
-
+            setSelectedContact: (contact) => set({ selectedContact: contact }),
             setUsers: (users) => set({ users }),
-
             clearCurrentUser: () => set({ currentUser: null, isAuthenticated: false }),
-
             setHydrated: () => set({ isHydrated: true }),
-
             login: (username: string, password: string, userToCheck?: RandomUserProps) => {
                 if (
                     userToCheck?.login.username === username &&
@@ -32,7 +29,6 @@ export const useUserStore = create<UserStateProps>()(
                 }
                 return false;
             },
-
             logout: () => {
                 set({
                     currentUser: null,
@@ -48,9 +44,19 @@ export const useUserStore = create<UserStateProps>()(
             name: "user-storage",
             partialize: (state) => ({
                 currentUser: state.currentUser,
+                selectedContact: state.selectedContact,
+                users: state.users,
+                isAuthenticated: state.isAuthenticated,
             }),
             onRehydrateStorage: () => (state) => {
-                state?.setHydrated();
+                const user = state?.currentUser;
+                const isValid = user && user.login?.username && user.login?.password;
+
+                if (!isValid) {
+                    state?.logout();
+                } else {
+                    state?.setHydrated();
+                }
             },
             version: 1.0,
         },
