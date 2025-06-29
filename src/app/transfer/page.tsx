@@ -1,12 +1,21 @@
 "use client";
-import { Avatar } from "@heroui/react";
+import { DateRangePicker, DateValue, RangeValue } from "@heroui/react";
 import MainLayout from "../../components/pages/layout/MainLayout";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import TransferList from "@/components/pages/transfer/Transfer";
 import { inter } from "@/config/fonts";
+import { useUserStore } from "@/stores/userStore";
+import { useState } from "react";
 export default function Transfer() {
     const router = useRouter();
+    const { users } = useUserStore();
+    const [dateBetween, setDateBetween] = useState<RangeValue<DateValue> | null>();
+
+    const handleResetDates = () => {
+        setDateBetween(null);
+    };
+
     return (
         <MainLayout
             expanded={true}
@@ -17,16 +26,32 @@ export default function Transfer() {
                         icon="icons8:left-arrow"
                         className="cursor-pointer"
                     />
-                    <p>Transfers</p>
+                    <p className={`${inter.className} font-bold text-[20px]`}>Transfers</p>
                 </div>
             }
             bodyContent={
                 <>
-                    <div className="max-h-[28rem] xl1:max-h-[38rem] overflow-y-auto p-2">
+                    <div className="flex flex-col gap-2">
                         <p className={`${inter.className} font-bold text-[20px]`}>
                             Latest transfer
                         </p>
-                        <TransferList />
+                        <DateRangePicker
+                            aria-label="filterDate"
+                            onChange={(value) => {
+                                console.log(value);
+                                setDateBetween(value);
+                            }}
+                            value={dateBetween}
+                            className="max-w-xs"
+                            label="Stay duration"
+                        />
+                    </div>
+                    <div className="max-h-[22rem] xl1:max-h-[33rem] overflow-y-auto p-2">
+                        <TransferList
+                            userList={users}
+                            dateBetween={dateBetween}
+                            onResetDates={handleResetDates}
+                        />
                     </div>
                 </>
             }

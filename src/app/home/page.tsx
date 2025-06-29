@@ -44,7 +44,7 @@ export default function Home() {
             date: "2023-05-16T17:34:00",
             amount: -24.0,
             currency: "$",
-            total: <p className="text-red-500 font-semibold">- $24.000</p>,
+            total: <p className={`${inter.className} text-red-500 font-semibold`}>- $24.000</p>,
         },
         {
             id: "2",
@@ -52,7 +52,7 @@ export default function Home() {
             date: "2025-06-28T19:12:00",
             amount: -600.0,
             currency: "$",
-            total: <p className="text-red-500 font-semibold">- $600.000</p>,
+            total: <p className={`${inter.className} text-red-500 font-semibold`}>- $600.000</p>,
         },
         {
             id: "3",
@@ -60,7 +60,7 @@ export default function Home() {
             date: "2023-05-29T19:12:00",
             amount: 260.0,
             currency: "$",
-            total: <p className="text-green-500 font-semibold">+ $260.000</p>,
+            total: <p className={`${inter.className} text-green-500 font-semibold`}>+ $260.000</p>,
         },
         {
             id: "4",
@@ -68,7 +68,7 @@ export default function Home() {
             date: "2023-04-23T11:28:00",
             amount: -100.0,
             currency: "$",
-            total: <p className="text-red-500 font-semibold">- $100.000</p>,
+            total: <p className={`${inter.className} text-red-500 font-semibold`}>- $100.000</p>,
         },
         {
             id: "5",
@@ -76,7 +76,7 @@ export default function Home() {
             date: "2025-06-28T19:12:00",
             amount: -600.0,
             currency: "$",
-            total: <p className="text-red-500 font-semibold">- $600.000</p>,
+            total: <p className={`${inter.className} text-red-500 font-semibold`}>- $600.000</p>,
         },
         {
             id: "6",
@@ -84,7 +84,7 @@ export default function Home() {
             date: "2023-06-02T13:20:00",
             amount: -89.5,
             currency: "$",
-            total: <p className="text-red-500 font-semibold">- $89.500</p>,
+            total: <p className={`${inter.className} text-red-500 font-semibold`}>- $89.500</p>,
         },
         {
             id: "7",
@@ -92,7 +92,9 @@ export default function Home() {
             date: "2023-06-01T08:00:00",
             amount: 1200.0,
             currency: "$",
-            total: <p className="text-green-500 font-semibold">+ $1.200.000</p>,
+            total: (
+                <p className={`${inter.className} text-green-500 font-semibold`}>+ $1.200.000</p>
+            ),
         },
     ];
 
@@ -176,7 +178,7 @@ export default function Home() {
                                 Transfer
                             </Button>
                             <Button onPress={() => router.push("/userProfile")} color="primary">
-                                User Profile
+                                Profile
                             </Button>
                             <button onClick={handleLogout}>Cerrar Sesión</button>
                         </div>
