@@ -21,26 +21,28 @@ function MainLayout({ headerContent, bodyContent, footerContent, expanded }: Mai
     // if (!isAuthenticated) return null;
 
     return (
-        <div className="flex flex-col items-center justify-center p-4 relative w-[400px] max-h-screen">
+        <div className="flex flex-col items-center justify-center p-4 relative w-[400px] h-[756px] max-h-screen">
             <div
-                className={`w-full ${expanded ? "h-[130px]" : "h-[190px]"} xl1:h-[270px] bg-emerald-400 overflow-hidden`}
+                className={`w-full ${expanded ? "h-[130px]" : "h-[190px]"} xl1:h-[220px] bg-emerald-400 overflow-hidden`}
             >
                 <div className="w-full bg-emerald-400 flex flex-col justify-center px-6 py-4">
                     {headerContent}
                 </div>
             </div>
 
-            <div className="w-full bg-white relative -mt-6 rounded-t-2xl z-10 shadow-lg">
+            <div className="w-full bg-white relative -mt-6 rounded-t-3xl z-10 shadow-lg">
                 <div
-                    className={`p-6 ${expanded ? "max-h-[650px] h-[25rem]" : "h-[380px]"} xl1:h-[530px]`}
+                    className={`p-6 ${expanded ? "max-h-[650px] h-[30rem] xl1:h-[6400px]" : "h-[380px] xl1:h-[530px]"}`}
                 >
                     {bodyContent}
                 </div>
             </div>
 
-            <div className="w-full bg-white relative -mt-6 rounded-t-2xl z-10 shadow-lg">
-                <div className="">{footerContent}</div>
-            </div>
+            {!expanded && (
+                <div className="w-full bg-white relative -mt-6 rounded-t-2xl z-10 shadow-lg">
+                    <div className="">{footerContent}</div>
+                </div>
+            )}
         </div>
     );
 }

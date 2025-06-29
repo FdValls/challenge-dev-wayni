@@ -1,7 +1,7 @@
 "use client";
 
-import Login from "@/components/Login/FormLogin";
-import LoginLayout from "@/components/pages/home/layouts/LoginLayout";
+import Login from "@/components/login/FormLogin";
+import LoginLayout from "@/components/pages/login/layout/LoginLayout";
 import { Avatar } from "@heroui/react";
 
 export default function LoginPage() {

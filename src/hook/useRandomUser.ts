@@ -13,7 +13,12 @@ const fetchRandomUsers = async (count: number = 10): Promise<RandomUserResponseP
     if (!response.ok) {
         throw new Error("Failed to fetch user");
     }
-    return response.json();
+
+    const data = await response.json();
+
+    return new Promise<RandomUserResponseProps>((resolve) => {
+        setTimeout(() => resolve(data), 2000);
+    });
 };
 const fetchRandomMainUser = async (): Promise<RandomUserResponseProps> => {
     const url = `https://randomuser.me/api/?nat=us,dk,fr,gb&results=1&seed=foobar`;

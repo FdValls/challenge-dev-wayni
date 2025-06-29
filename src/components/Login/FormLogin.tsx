@@ -1,19 +1,25 @@
 "use client";
 
-import { useRandomMainUser, useRandomUsers } from "@/hook/useRandomUser";
+import { useAuth } from "@/hook/useAuth";
+import { useRandomMainUser } from "@/hook/useRandomUser";
 import { useUserStore } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Login() {
+    const { isAuthenticated, isHydrated } = useAuth();
     const { data } = useRandomMainUser();
-
+    const { login } = useUserStore();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const { login } = useUserStore();
+    useEffect(() => {
+        if (isHydrated && isAuthenticated) {
+            router.replace("/home");
+        }
+    }, [isAuthenticated, isHydrated, router]);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -21,22 +27,20 @@ export default function Login() {
 
         try {
             const success = login(username, password, data?.results[0]);
-            if (true) {
-                localStorage.setItem(
-                    "user-data",
-                    JSON.stringify(data?.results[0].login.username || { username }),
-                );
+            if (success) {
+                localStorage.setItem("user-data", JSON.stringify(data?.results[0].login.username));
                 localStorage.setItem("balance", JSON.stringify(350000));
-                router.push("/home");
             } else {
-                alert("Error, credenciales inválidas");
+                alert("Credenciales inválidas");
             }
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.error(err);
         } finally {
             setLoading(false);
         }
     };
+
+    if (!isHydrated || isAuthenticated) return <p>Loading...</p>;
 
     return (
         <div className="min-h-screen flex-col my-4 items-center justify-center">

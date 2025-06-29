@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import ClientProviders from "../providers/ClientProviders";
+import ProtectedRoute from "@/wrappers/ProtectedRoute";
 
 export const metadata = {
     title: "WayniWallet",
@@ -10,7 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html suppressHydrationWarning lang="en">
             <body>
-                <ClientProviders>{children}</ClientProviders>
+                <ProtectedRoute>
+                    <ClientProviders>{children}</ClientProviders>
+                </ProtectedRoute>
             </body>
         </html>
     );

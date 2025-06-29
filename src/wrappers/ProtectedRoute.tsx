@@ -1,4 +1,3 @@
-// components/ProtectedRoute.tsx
 "use client";
 
 import { useAuth } from "@/hook/useAuth";
@@ -10,10 +9,10 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     const router = useRouter();
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!isLoading && !isAuthenticated) {
             router.push("/login");
         }
-    }, [isAuthenticated, router]);
+    }, [isAuthenticated, isLoading, router]);
 
     if (isLoading) return <p>Loading...</p>;
 
