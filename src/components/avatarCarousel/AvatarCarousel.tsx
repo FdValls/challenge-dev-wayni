@@ -11,7 +11,7 @@ interface AvatarCarouselProps {
 
 const AvatarCarousel = ({ setSelectedcontact }: AvatarCarouselProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const { data, isLoading } = useRandomUsers();
+    const { data, isLoading } = useRandomUsers(20);
 
     const itemsPerView = 3;
 
