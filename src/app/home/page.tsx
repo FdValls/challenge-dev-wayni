@@ -101,15 +101,19 @@ export default function Home() {
             <MainLayout
                 headerContent={
                     <>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-col justify-items-center items-center -mt-[10px]">
                             <Avatar
-                                size="md"
+                                size="lg"
                                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                             />
-                            <div className="flex flex-col gap-0">
-                                <h2>{currentUser?.name.first}</h2>
+                            <div className="flex flex-col justify-items-center items-center">
+                                <p className={`${inter.className} font-bold text-[32px]`}>
+                                    {currentUser?.name.first}
+                                </p>
                                 <div>
-                                    <p>Your Balance: ${localStorage.getItem("balance")}</p>
+                                    <p className={`${inter.className} font-bold text-[16px]`}>
+                                        Your Balance: ${localStorage.getItem("balance")}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -124,17 +128,26 @@ export default function Home() {
                                 </p>
                                 <AvatarCarousel setSelectedcontact={setSelectedcontact} />
                             </div>
-                            <div className="max-h-[13rem] xl1:max-h-[22rem] overflow-y-auto">
+                            <p className={`title-section ${inter.className} text-center`}>
+                                Lastest Transaction
+                            </p>
+                            <div className="max-h-[9rem] xl1:max-h-[22rem] overflow-y-auto">
                                 {transactions.map((tx) => (
                                     <div
                                         key={tx.id}
-                                        className="flex items-center justify-between px-4 py-3 border-b"
+                                        className="flex items-center justify-between px-4 py-2 border-b"
                                     >
                                         <div className="flex items-center space-x-3">
                                             {tx.icon}
                                             <div>
-                                                <p className="font-medium text-sm">{tx.title}</p>
-                                                <p className="text-xs text-gray-500">
+                                                <p
+                                                    className={`${inter.className} font-normal text-[18px]`}
+                                                >
+                                                    {tx.title}
+                                                </p>
+                                                <p
+                                                    className={`${inter.className} font-extralight text-[14px] text-[#999999]`}
+                                                >
                                                     {new Date(tx.date).toLocaleString("en-US", {
                                                         month: "short",
                                                         day: "numeric",

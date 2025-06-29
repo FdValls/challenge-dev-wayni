@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
         }
     }, [isAuthenticated, isLoading, router]);
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return null;
 
     return <>{children}</>;
 }

@@ -7,7 +7,7 @@ import { useUserStore } from "../stores/userStore";
 
 function ZustandHydration({ children }: { children: ReactNode }) {
     const isHydrated = useUserStore((state) => state.isHydrated);
-    if (!isHydrated) return <div>Loading...</div>;
+    if (!isHydrated) return null;
     return <>{children}</>;
 }
 

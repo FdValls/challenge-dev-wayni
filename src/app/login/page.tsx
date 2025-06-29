@@ -9,9 +9,8 @@ export default function LoginPage() {
         <LoginLayout
             headerContent={
                 <div className="justify-items-center">
-                    <h2 className="text-center text-3xl font-bold text-gray-900">Iniciar Sesión</h2>
                     <Avatar
-                        className="h-[100px] w-[100px] my-2"
+                        className="h-[145px] w-[145px] mb-2"
                         size="lg"
                         src="https://ayuda.waynimovil.com/hc/theming_assets/01HZPEMPTZKDV2B5NK66RJKFRT"
                     />
