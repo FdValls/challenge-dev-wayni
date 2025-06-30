@@ -35,7 +35,7 @@ export default function Login() {
             if (success) {
                 localStorage.setItem("user-data", JSON.stringify(data?.results[0].login.username));
                 localStorage.setItem("balance", JSON.stringify(350000));
-                toast("Successful", {
+                toast("Sign in successful", {
                     autoClose: 6000,
                     type: "success",
                     hideProgressBar: false,
