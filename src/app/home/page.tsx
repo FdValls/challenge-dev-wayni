@@ -4,17 +4,16 @@ import MainLayout from "../../components/pages/layout/MainLayout";
 import { useRouter } from "next/navigation";
 import AvatarCarousel from "@/components/avatarCarousel/AvatarCarousel";
 import { useUserStore } from "@/stores/userStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RandomUserProps } from "@/interfaces/RandomUserProps";
 import { inter } from "@/config/fonts";
 import { Icon } from "@iconify/react";
 
 export default function Home() {
     const router = useRouter();
-    const { logout } = useUserStore();
+    const { logout, setSelectedContact, currentUser } = useUserStore();
+    const currenBalance = useRef(localStorage.getItem("balance"));
     const [selectedContact, setSelectedcontact] = useState<RandomUserProps>();
-    const currentUser = useUserStore((state) => state.currentUser);
-    const { setSelectedContact } = useUserStore();
 
     useEffect(() => {
         if (selectedContact) {
@@ -41,6 +40,7 @@ export default function Home() {
         {
             id: "1",
             title: "Internet",
+            icon: <Icon className="text-[20px] text-[#662AB2]" icon="tdesign:internet" />,
             date: "2023-05-16T17:34:00",
             amount: -24.0,
             currency: "$",
@@ -50,6 +50,7 @@ export default function Home() {
             id: "2",
             title: "Transfer",
             date: "2025-06-28T19:12:00",
+            icon: <Icon className="text-[20px] text-[#662AB2]" icon="ci:transfer" />,
             amount: -600.0,
             currency: "$",
             total: <p className={`${inter.className} text-red-500 font-semibold`}>- $600.000</p>,
@@ -57,6 +58,12 @@ export default function Home() {
         {
             id: "3",
             title: "CashIn",
+            icon: (
+                <Icon
+                    className="text-[20px] text-[#662AB2]"
+                    icon="streamline-freehand:cash-payment-bill"
+                />
+            ),
             date: "2023-05-29T19:12:00",
             amount: 260.0,
             currency: "$",
@@ -65,6 +72,12 @@ export default function Home() {
         {
             id: "4",
             title: "Insurance",
+            icon: (
+                <Icon
+                    className="text-[20px] text-[#662AB2]"
+                    icon="streamline-ultimate:insurance-hand-bold"
+                />
+            ),
             date: "2023-04-23T11:28:00",
             amount: -100.0,
             currency: "$",
@@ -74,6 +87,7 @@ export default function Home() {
             id: "5",
             title: "Transfer",
             date: "2025-06-28T19:12:00",
+            icon: <Icon className="text-[20px] text-[#662AB2]" icon="ci:transfer" />,
             amount: -600.0,
             currency: "$",
             total: <p className={`${inter.className} text-red-500 font-semibold`}>- $600.000</p>,
@@ -81,6 +95,7 @@ export default function Home() {
         {
             id: "6",
             title: "Groceries",
+            icon: <Icon className="text-[20px] text-[#662AB2]" icon="wpf:dining-room" />,
             date: "2023-06-02T13:20:00",
             amount: -89.5,
             currency: "$",
@@ -89,6 +104,7 @@ export default function Home() {
         {
             id: "7",
             title: "Salary",
+            icon: <Icon className="text-[20px] text-[#662AB2]" icon="iconoir:wallet-solid" />,
             date: "2023-06-01T08:00:00",
             amount: 1200.0,
             currency: "$",
@@ -104,7 +120,7 @@ export default function Home() {
                 hasFooter={true}
                 headerContent={
                     <>
-                        <div className="flex flex-col justify-items-center items-center -mt-[10px]">
+                        <div className="flex flex-col justify-items-center items-center xl1:mt-[10px]">
                             <Avatar
                                 size="lg"
                                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
@@ -119,7 +135,7 @@ export default function Home() {
                                     <p
                                         className={`${inter.className} font-bold text-[16px] text-white`}
                                     >
-                                        Your Balance: ${localStorage.getItem("balance")}
+                                        Your Balance: ${currenBalance.current}
                                     </p>
                                 </div>
                             </div>
@@ -138,11 +154,11 @@ export default function Home() {
                             <p className={`title-section ${inter.className} text-center`}>
                                 Lastest Transaction
                             </p>
-                            <div className="max-h-[9rem] xl1:max-h-[17rem] overflow-y-auto">
+                            <div className="max-h-[13rem] xl1:max-h-[26rem] overflow-y-auto">
                                 {transactions.map((tx) => (
                                     <div
                                         key={tx.id}
-                                        className="flex items-center justify-between px-4 py-2 border-b"
+                                        className="flex items-center justify-between pr-4 xl1:px-4 py-2 border-b"
                                     >
                                         <div className="flex items-center space-x-3">
                                             {tx.icon}

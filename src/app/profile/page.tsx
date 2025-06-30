@@ -26,7 +26,7 @@ export default function Profile() {
             }
             bodyContent={
                 <>
-                    <div className="max-h-[32rem] xl1:max-h-[38rem] overflow-y-auto p-2">
+                    <div>
                         <ProfileData userList={currentUser} />
                     </div>
                 </>

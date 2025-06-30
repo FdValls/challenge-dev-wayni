@@ -43,12 +43,11 @@ export default function Transfer() {
                             onChange={(value) => {
                                 setDateBetween(value);
                             }}
-                            value={dateBetween}
                             className="max-w-xs"
-                            label="Stay duration"
+                            label="Range of dates"
                         />
                     </div>
-                    <div className="max-h-[22rem] xl1:max-h-[32rem] overflow-y-auto p-2">
+                    <div className="xl1:max-h-[45rem] overflow-y-auto p-2">
                         <TransferList
                             userList={users}
                             dateBetween={dateBetween}

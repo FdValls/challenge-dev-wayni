@@ -1,14 +1,33 @@
 import { RandomUserProps } from "@/interfaces/RandomUserProps";
-import { UserStateProps } from "@/interfaces/UserStateProps";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export const useUserStore = create<UserStateProps>()(
+type UserState = {
+    currentUser: RandomUserProps | null;
+    users: RandomUserProps[];
+    selectedContact: RandomUserProps | null;
+    isHydrated: boolean;
+    isAuthenticated: boolean;
+    setCurrentUser: (user: RandomUserProps) => void;
+    setSelectedContact: (contact: RandomUserProps) => void;
+    setUsers: (users: RandomUserProps[]) => void;
+    clearCurrentUser: () => void;
+    setHydrated: () => void;
+    login: (username: string, password: string, userToCheck?: RandomUserProps) => boolean;
+    logout: () => void;
+};
+
+const excludeField = (obj: any, field: any) => {
+    const { [field]: _, ...rest } = obj;
+    return rest;
+};
+
+export const useUserStore = create<UserState>()(
     persist(
         (set) => ({
             currentUser: null,
-            selectedContact: null,
             users: [],
+            selectedContact: null,
             isHydrated: false,
             isAuthenticated: false,
             setCurrentUser: (user) => set({ currentUser: user }),
@@ -38,6 +57,8 @@ export const useUserStore = create<UserStateProps>()(
                 });
 
                 localStorage.removeItem("user-storage");
+                localStorage.removeItem("balance");
+                localStorage.removeItem("user-data");
             },
         }),
         {
@@ -45,7 +66,8 @@ export const useUserStore = create<UserStateProps>()(
             partialize: (state) => ({
                 currentUser: state.currentUser,
                 selectedContact: state.selectedContact,
-                users: state.users,
+                users: state.users.map((user) => excludeField(user, "login")),
+                // users: state.users,
                 isAuthenticated: state.isAuthenticated,
             }),
             onRehydrateStorage: () => (state) => {

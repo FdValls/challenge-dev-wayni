@@ -27,8 +27,6 @@ export const FormInput = ({
         formState: { errors },
     } = useFormContext();
 
-    // const watchedValue = useWatch({ name });
-
     const error = errors[name]?.message as string | undefined;
 
     return (

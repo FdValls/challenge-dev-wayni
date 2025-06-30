@@ -21,4 +21,4 @@ export const LoginFormSchema = z.object({
         }),
 });
 
-export type CreateLogin = z.infer<typeof LoginFormSchema>;
+export type LoginFormValidation = z.infer<typeof LoginFormSchema>;
