@@ -5,4 +5,5 @@ export interface MainLayoutProps {
     bodyContent?: ReactNode;
     footerContent?: ReactNode;
     expanded?: boolean;
+    hasFooter?: boolean;
 }

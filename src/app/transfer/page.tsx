@@ -19,14 +19,17 @@ export default function Transfer() {
     return (
         <MainLayout
             expanded={true}
+            hasFooter={false}
             headerContent={
                 <div className="flex gap-[6rem] items-center justify-items-center">
                     <Icon
                         onClick={() => router.back()}
                         icon="icons8:left-arrow"
-                        className="cursor-pointer"
+                        className="cursor-pointer text-[18px] text-white"
                     />
-                    <p className={`${inter.className} font-bold text-[20px]`}>Transfers</p>
+                    <p className={`${inter.className} font-bold text-[20px] text-white`}>
+                        Transfers
+                    </p>
                 </div>
             }
             bodyContent={
@@ -38,7 +41,6 @@ export default function Transfer() {
                         <DateRangePicker
                             aria-label="filterDate"
                             onChange={(value) => {
-                                console.log(value);
                                 setDateBetween(value);
                             }}
                             value={dateBetween}
@@ -46,7 +48,7 @@ export default function Transfer() {
                             label="Stay duration"
                         />
                     </div>
-                    <div className="max-h-[22rem] xl1:max-h-[33rem] overflow-y-auto p-2">
+                    <div className="max-h-[22rem] xl1:max-h-[32rem] overflow-y-auto p-2">
                         <TransferList
                             userList={users}
                             dateBetween={dateBetween}

@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Button, Divider } from "@heroui/react";
+import { Avatar, Divider } from "@heroui/react";
 import MainLayout from "../../components/pages/layout/MainLayout";
 import { useRouter } from "next/navigation";
 import AvatarCarousel from "@/components/avatarCarousel/AvatarCarousel";
@@ -7,6 +7,7 @@ import { useUserStore } from "@/stores/userStore";
 import { useEffect, useState } from "react";
 import { RandomUserProps } from "@/interfaces/RandomUserProps";
 import { inter } from "@/config/fonts";
+import { Icon } from "@iconify/react";
 
 export default function Home() {
     const router = useRouter();
@@ -19,7 +20,6 @@ export default function Home() {
         if (selectedContact) {
             setSelectedContact(selectedContact);
             router.push("/sendAgain");
-            console.log("contactSelected: ", selectedContact);
         }
     }, [setSelectedcontact, selectedContact, setSelectedContact, router]);
 
@@ -101,6 +101,7 @@ export default function Home() {
     return (
         <>
             <MainLayout
+                hasFooter={true}
                 headerContent={
                     <>
                         <div className="flex flex-col justify-items-center items-center -mt-[10px]">
@@ -109,11 +110,15 @@ export default function Home() {
                                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                             />
                             <div className="flex flex-col justify-items-center items-center">
-                                <p className={`${inter.className} font-bold text-[32px]`}>
+                                <p
+                                    className={`${inter.className} font-bold text-[32px] text-white`}
+                                >
                                     {currentUser?.name.first}
                                 </p>
                                 <div>
-                                    <p className={`${inter.className} font-bold text-[16px]`}>
+                                    <p
+                                        className={`${inter.className} font-bold text-[16px] text-white`}
+                                    >
                                         Your Balance: ${localStorage.getItem("balance")}
                                     </p>
                                 </div>
@@ -133,7 +138,7 @@ export default function Home() {
                             <p className={`title-section ${inter.className} text-center`}>
                                 Lastest Transaction
                             </p>
-                            <div className="max-h-[9rem] xl1:max-h-[22rem] overflow-y-auto">
+                            <div className="max-h-[9rem] xl1:max-h-[17rem] overflow-y-auto">
                                 {transactions.map((tx) => (
                                     <div
                                         key={tx.id}
@@ -171,16 +176,48 @@ export default function Home() {
                 }
                 footerContent={
                     <>
-                        <div>
-                            <Divider className="my-2" />
-                            <Button color="primary">Home</Button>
-                            <Button onPress={() => router.push("/transfer")} color="primary">
-                                Transfer
-                            </Button>
-                            <Button onPress={() => router.push("/userProfile")} color="primary">
-                                Profile
-                            </Button>
-                            <button onClick={handleLogout}>Cerrar Sesión</button>
+                        <Divider className="my-2" />
+                        <div className="flex gap-6 items-center justify-around">
+                            <div
+                                className="justify-items-center cursor-pointer"
+                                onClick={() => router.push("/home")}
+                            >
+                                <Icon
+                                    className="w-[25px] h-[25px] text-[#662AB2]"
+                                    icon="material-symbols:home"
+                                />
+                                <p className={`${inter.className} text-[14px]`}>Home</p>
+                            </div>
+                            <div
+                                className="justify-items-center cursor-pointer"
+                                onClick={() => router.push("/transfer")}
+                            >
+                                <Icon
+                                    className="w-[25px] h-[25px] text-[#662AB2]"
+                                    icon="material-symbols:home"
+                                />
+                                <p className={`${inter.className} text-[14px]`}>Transfer</p>
+                            </div>
+                            <div
+                                className="justify-items-center cursor-pointer"
+                                onClick={() => router.push("/profile")}
+                            >
+                                <Icon
+                                    className="w-[25px] h-[25px] text-[#662AB2]"
+                                    icon="material-symbols:home"
+                                />
+                                <p className={`${inter.className} text-[14px]`}>Profile</p>
+                            </div>
+                            <div
+                                className="justify-items-center cursor-pointer"
+                                onClick={handleLogout}
+                            >
+                                <Icon
+                                    className="w-[25px] h-[25px] text-[#662AB2]"
+                                    icon="material-symbols:logout"
+                                />
+                                <p className={`${inter.className} text-[14px]`}>Logout</p>
+                            </div>
                         </div>
                     </>
                 }

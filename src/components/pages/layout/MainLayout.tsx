@@ -5,20 +5,25 @@ import { MainLayoutProps } from "@/interfaces/LayoutHomeProps";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-function MainLayout({ headerContent, bodyContent, footerContent, expanded }: MainLayoutProps) {
+function MainLayout({
+    headerContent,
+    bodyContent,
+    footerContent,
+    expanded,
+    hasFooter,
+}: MainLayoutProps) {
     const { isAuthenticated, isHydrated } = useAuth();
     const router = useRouter();
 
-    // useEffect(() => {
-    //     if (isHydrated && !isAuthenticated) {
-    //         router.replace("/login");
-    //     }
-    // }, [isHydrated, isAuthenticated, router]);
+    useEffect(() => {
+        if (isHydrated && !isAuthenticated) {
+            router.replace("/login");
+        }
+    }, [isHydrated, isAuthenticated, router]);
 
-    // if (!isHydrated)
-    //     return <div className="flex items-center justify-center h-screen">Cargando...</div>;
+    if (!isHydrated) return null;
 
-    // if (!isAuthenticated) return null;
+    if (!isAuthenticated) return null;
 
     return (
         <div className="flex flex-col items-center justify-center p-4 relative w-[400px] h-[756px] max-h-screen">
@@ -32,13 +37,13 @@ function MainLayout({ headerContent, bodyContent, footerContent, expanded }: Mai
 
             <div className="w-full bg-white relative -mt-6 rounded-t-3xl z-10 shadow-lg">
                 <div
-                    className={`p-6 ${expanded ? "max-h-[650px] h-[30rem] xl1:h-[6400px]" : "h-[380px] xl1:h-[530px]"}`}
+                    className={`p-6 ${expanded ? "max-h-[650px] h-[30rem] xl1:h-[640px]" : "h-[380px] xl1:h-[530px]"}`}
                 >
                     {bodyContent}
                 </div>
             </div>
 
-            {!expanded && (
+            {hasFooter && (
                 <div className="w-full bg-white relative -mt-6 rounded-t-2xl z-10 shadow-lg">
                     <div className="">{footerContent}</div>
                 </div>

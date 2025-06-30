@@ -70,20 +70,9 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
                 59,
             );
 
-            console.log("Date range:", {
-                start: startDate.toISOString(),
-                end: endDate.toISOString(),
-                startDateValue: dateBetween.start,
-                endDateValue: dateBetween.end,
-            });
-
             return processedUserList.filter((item) => {
                 const itemDate = item.randomDate;
                 const isInRange = isWithinInterval(itemDate, { start: startDate, end: endDate });
-
-                console.log(
-                    `${item.name.first} - ${item.fechaFinal} (${itemDate.toISOString()}) is in range: ${isInRange}`,
-                );
 
                 return isInRange;
             });
@@ -126,7 +115,7 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
                         <Button
                             color="secondary"
                             size="sm"
-                            className={`bg-emerald-400 text-white font-semibold text-[10px]`}
+                            className={`${inter.className} bg-emerald-400 text-white font-semibold text-[10px]`}
                             onPress={handleResetDates}
                         >
                             Clear Filters
