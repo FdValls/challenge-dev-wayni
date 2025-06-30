@@ -16,10 +16,10 @@ type TempTransactionState = {
 
 export const useTempTransactionStore = create<TempTransactionState>((set) => ({
     amount: "",
-    valueTextArea: "For food",
+    valueTextArea: "",
     nameUserTransfer: "",
     lastNameUserTransfer: "",
     setTempTransaction: ({ amount, valueTextArea, lastNameUserTransfer, nameUserTransfer }) =>
         set({ amount, valueTextArea, lastNameUserTransfer, nameUserTransfer }),
-    resetTempTransaction: () => set({ amount: "", valueTextArea: "For food" }),
+    resetTempTransaction: () => set({ amount: "", valueTextArea: "" }),
 }));

@@ -31,10 +31,14 @@ export default function ShowData({
                 <p className={`${inter.className} font-bold text-[35px]`}>${amountTotal}</p>
             </div>
 
-            <div className="flex flex-col items-center gap-2 ">
+            <div className="flex flex-col items-center gap-2 mt-8">
                 <p className={`${inter.className} font-bold`}>Send To</p>
-                <div className="flex gap-2">
-                    <Avatar size="md" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+                <div className="flex gap-2 items-center justify-items-center xl1:mt-4">
+                    <Avatar
+                        size="md"
+                        className="xl1:w-[160px] xl1:h-[160px] w-[150px] h-[150px]"
+                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                    />
                     <div className={`${inter.className} flex flex-col text-[16px]`}>
                         <p>{nameUserTransfer}</p>
                         <p>{lastNameUserTransfer}</p>
@@ -42,8 +46,8 @@ export default function ShowData({
                 </div>
             </div>
 
-            <p className="font-bold">Transaction Details</p>
-            <div className={`flex flex-col gap-1 mt-2 ${inter.className}`}>
+            <p className="font-bold mt-10">Transaction Details</p>
+            <div className={`flex flex-col gap-4 mt-4 ${inter.className}`}>
                 <div className="flex justify-between">
                     <p className={`text-[16px] text-[#999999]`}>Payment</p>
                     <p className={`text-[16px] font-bold text-black`}>{amountTotal}</p>

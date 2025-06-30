@@ -95,20 +95,3 @@ export const useMultipleUsers = (results: number = 10, seed?: string) => {
 
     return query;
 };
-
-// Hook para generar nuevo usuario (mutation)
-export const useGenerateNewUser = () => {
-    const queryClient = useQueryClient();
-    const { setCurrentUser } = useUserStore();
-
-    return useMutation({
-        mutationFn: () => fetchRandomUsers(),
-        onSuccess: (data) => {
-            if (data.results.length > 0) {
-                setCurrentUser(data.results[0]);
-            }
-            // Invalidar queries relacionadas
-            queryClient.invalidateQueries({ queryKey: ["randomUser"] });
-        },
-    });
-};

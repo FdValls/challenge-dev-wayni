@@ -49,7 +49,6 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
         });
     }, [userList]);
 
-    // Filtrar por rango de fechas
     const filteredUserList = useMemo(() => {
         if (!dateBetween || !dateBetween.start || !dateBetween.end) {
             return processedUserList;
@@ -82,7 +81,6 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
         }
     }, [processedUserList, dateBetween]);
 
-    // Calcular total amount de los items filtrados
     const totalAmount = useMemo(() => {
         return filteredUserList.reduce((sum, item) => sum + item.amount, 0);
     }, [filteredUserList]);
@@ -95,7 +93,7 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
 
     return (
         <>
-            <div className="flex flex-col gap-4 mt-4 max-h-screen">
+            <div className="flex flex-col gap-4 mt-4 h-[30rem] xl1:h-[41rem]">
                 {/* Header con información del filtro y botón reset */}
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">

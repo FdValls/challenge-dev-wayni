@@ -26,17 +26,14 @@ export default function SendAgainTwo() {
             }
             footerContent={
                 <>
-                    <div className="p-2 ">
+                    <div className="flex flex-col gap-4 p-0 mt-8">
                         <Button
                             variant="bordered"
-                            // onPress={() => router.push("/sendAgainTwo")}
                             className={`bg-emerald-400 w-full border-2 border-white`}
                             radius="full"
                         >
                             <p className={`font-bold text-white text-[18px]`}>Share</p>
                         </Button>
-                    </div>
-                    <div className="p-2 ">
                         <Button
                             onPress={() => router.push("/home")}
                             className="bg-white w-full"

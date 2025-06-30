@@ -26,9 +26,9 @@ function MainLayout({
     if (!isAuthenticated) return null;
 
     return (
-        <div className="flex flex-col items-center justify-center p-4 relative w-[400px] h-[756px] max-h-screen">
+        <div className="flex flex-col items-center justify-center p-4 relative w-[400px] h-[715px] xl1:h-[920px]">
             <div
-                className={`w-full ${expanded ? "h-[130px]" : "h-[190px]"} xl1:h-[220px] bg-emerald-400 overflow-hidden`}
+                className={`w-full ${expanded ? "h-[188px]" : "h-[190px]"} xl1:h-[300px] bg-emerald-400 overflow-hidden`}
             >
                 <div className="w-full bg-emerald-400 flex flex-col justify-center px-6 py-4">
                     {headerContent}
@@ -37,7 +37,7 @@ function MainLayout({
 
             <div className="w-full bg-white relative -mt-6 rounded-t-3xl z-10 shadow-lg">
                 <div
-                    className={`p-6 ${expanded ? "max-h-[650px] h-[30rem] xl1:h-[640px]" : "h-[380px] xl1:h-[530px]"}`}
+                    className={`p-6 ${expanded ? "h-[600px] xl1:h-[820px]" : "h-[480px] xl1:h-[650px]"}`}
                 >
                     {bodyContent}
                 </div>

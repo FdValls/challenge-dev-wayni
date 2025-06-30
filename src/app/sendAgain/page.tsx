@@ -1,36 +1,34 @@
 "use client";
 
+import { FormInput } from "@/components/form/FormInput";
+import { FormTextArea } from "@/components/form/FormTextArea";
+import { GenericForm } from "@/components/form/GenericForm";
 import MainLayout from "@/components/pages/layout/MainLayout";
 import { inter } from "@/config/fonts";
+import { SendAgainFormSchema } from "@/models/sendAgainSchema/SendAgainFormSchema";
 import { useTempTransactionStore } from "@/stores/tempTransactionStore";
 import { useUserStore } from "@/stores/userStore";
-import { Avatar, Button, Textarea } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+
+interface SendAgainProps {
+    amount: string;
+    valueTextArea?: string | undefined;
+}
 
 export default function SendAgain() {
     const { selectedContact } = useUserStore();
     const { setTempTransaction } = useTempTransactionStore();
-    const [amountValue, setAmountValue] = useState("");
-    const [valueTextAreaLabel, setValueTextAreaLabel] = useState("For food");
     const currenAmount = useRef(localStorage.getItem("balance"));
     const router = useRouter();
+    const schema = SendAgainFormSchema;
 
-    const formatNumber = (value: any) => {
-        const number = value.replace(/\D/g, "");
-        return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-    const handleAmountChange = (e: any, setter: any) => {
-        const value = e.target.value;
-        const formatted = formatNumber(value);
-        setter(formatted);
-    };
-    const handleSubmit = () => {
+    const handleSubmit = (data: SendAgainProps) => {
         setTempTransaction({
-            amount: amountValue,
-            valueTextArea: valueTextAreaLabel,
+            amount: data.amount,
+            valueTextArea: data?.valueTextArea ?? "For Food",
             lastNameUserTransfer: selectedContact?.name.last,
             nameUserTransfer: selectedContact?.name.first,
         });
@@ -40,7 +38,8 @@ export default function SendAgain() {
     return (
         <>
             <MainLayout
-                hasFooter={true}
+                hasFooter={false}
+                expanded={false}
                 headerContent={
                     <>
                         <div className="flex flex-col gap-4">
@@ -70,66 +69,62 @@ export default function SendAgain() {
                 bodyContent={
                     <>
                         <div
-                            className={`${inter.className} flex items-center gap-4 place-content-center`}
+                            className={`${inter.className} flex flex-col items-center h-[25rem] xl1:h-[11rem] place-content-center`}
                         >
-                            <div className="flex flex-col gap-4 items-center justify-self-center">
-                                <Avatar size="md" src={`${selectedContact?.picture.medium}`} />
+                            <div className="w-full flex flex-col items-center justify-self-center">
+                                <Avatar
+                                    size="md"
+                                    className={`w-[40px] h-[40px] xl1:w-[100px] xl1:h-[100px]`}
+                                    src={`${selectedContact?.picture.medium}`}
+                                />
                                 <div>
                                     <p>{`${selectedContact?.name.first} ${selectedContact?.name.last}`}</p>
                                 </div>
                                 <div>
                                     <p
-                                        className={`${inter.className} font-normal text-[20px] text-[#121212]`}
+                                        className={`${inter.className} font-bold text-[20px] text-[#121212]`}
                                     >
                                         Set Amount
                                     </p>
                                 </div>
-                                <div className="bg-white w-full rounded-lg shadow-lg">
-                                    <div className="flex items-center border-2 border-emerald-400 rounded-lg focus-within:ring-2 focus-within:ring-emerald-400 transition-all">
-                                        <span className=" text-4xl font-bold text-gray-400">$</span>
-                                        <input
-                                            type="text"
-                                            value={amountValue}
-                                            onChange={(e) => handleAmountChange(e, setAmountValue)}
-                                            placeholder="0"
-                                            className="w-full flex-1 px-4 py-3 text-4xl font-bold text-gray-400 bg-transparent focus:outline-none text-center"
+                                <div className="w-full xl1:h-[10rem] mt-4">
+                                    <GenericForm
+                                        schema={schema}
+                                        onSubmit={(data) => {
+                                            handleSubmit(data);
+                                        }}
+                                    >
+                                        <FormInput
+                                            className="w-full"
+                                            name={`amount`}
+                                            label="Price"
+                                            type="number"
                                         />
-                                    </div>
+                                        <div
+                                            className={`flex flex-col w-full ${inter.className} font-normal text-[18px] max-h-screen`}
+                                        >
+                                            <div className="flex flex-col gap-2">
+                                                <p className={`text-[18px] mb-[16px]`}>Notes</p>
+                                                <FormTextArea
+                                                    name="valueTextArea"
+                                                    label={"For Food"}
+                                                />
+                                            </div>
+                                            <Button
+                                                type="submit"
+                                                className="bg-emerald-400 w-full"
+                                                radius="full"
+                                            >
+                                                <p
+                                                    className={`${inter.className} p-2 font-bold text-[18px] text-white`}
+                                                >
+                                                    Proceed to Transfer
+                                                </p>
+                                            </Button>
+                                        </div>
+                                    </GenericForm>
                                 </div>
                             </div>
-                        </div>
-                        <div className={`mt-2 ${inter.className} font-normal text-[18px]`}>
-                            <p className={`mt-2 text-[18px]`}>Notes</p>
-                            <Textarea
-                                className="max-w-xs mt-2"
-                                placeholder={valueTextAreaLabel}
-                                onValueChange={(value) => setValueTextAreaLabel(value)}
-                                classNames={{
-                                    input: "placeholder:text-gray-400 placeholder:italic placeholder:text-sm",
-                                }}
-                            />
-                        </div>
-                    </>
-                }
-                footerContent={
-                    <>
-                        <div className="p-2 my-2">
-                            <Button
-                                isDisabled={
-                                    Number(amountValue.replace(/,/g, "")) >=
-                                        Number(currenAmount.current) ||
-                                    Number(amountValue.replace(/,/g, "")) === 0
-                                }
-                                onPress={() => handleSubmit()}
-                                className="bg-emerald-400 w-full"
-                                radius="full"
-                            >
-                                <p
-                                    className={`${inter.className} p-2 font-bold text-[18px] text-white`}
-                                >
-                                    Proceed to Transfer
-                                </p>
-                            </Button>
                         </div>
                     </>
                 }
