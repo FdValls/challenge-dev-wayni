@@ -1,4 +1,4 @@
-export interface RandomUserProps {
+export interface IRandomUserProps {
     gender: string;
     name: {
         title: string;

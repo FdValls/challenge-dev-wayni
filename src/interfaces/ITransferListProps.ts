@@ -1,8 +1,8 @@
-import { RandomUserProps } from "./RandomUserProps";
+import { IRandomUserProps } from "./IRandomUserProps";
 import { DateValue, RangeValue } from "@heroui/react";
 
-export interface TransferListProps {
-    userList?: RandomUserProps[];
+export interface ITransferListProps {
+    userList?: IRandomUserProps[];
     dateBetween?: RangeValue<DateValue> | null | undefined;
     onResetDates?: () => void;
 }

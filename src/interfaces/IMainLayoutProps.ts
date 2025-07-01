@@ -1,6 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
 
-export interface MainLayoutProps {
+export interface IMainLayoutProps {
     headerContent?: ReactNode;
     bodyContent?: ReactNode;
     footerContent?: ReactNode;

@@ -1,13 +1,13 @@
 "use client";
 
 import { inter } from "@/config/fonts";
-import { TransferListProps } from "@/interfaces/TransferListProps";
+import { ITransferListProps } from "@/interfaces/ITransferListProps";
 import { useUserStore } from "@/stores/userStore";
 import { Image, Button } from "@heroui/react";
 import { format, isYesterday, isWithinInterval } from "date-fns";
 import { useMemo } from "react";
 
-export default function TransferList({ userList, dateBetween, onResetDates }: TransferListProps) {
+export default function TransferList({ userList, dateBetween, onResetDates }: ITransferListProps) {
     const currentUser = useUserStore((state) => state.currentUser);
 
     const processedUserList = useMemo(() => {
@@ -93,8 +93,7 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
 
     return (
         <>
-            <div className="flex flex-col gap-4 mt-4 h-[30rem] xl1:h-[41rem]">
-                {/* Header con información del filtro y botón reset */}
+            <div className="flex flex-col gap-4 mt-4 h-[28rem] xl1:h-[41rem]">
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">
                         <p
@@ -121,7 +120,6 @@ export default function TransferList({ userList, dateBetween, onResetDates }: Tr
                     )}
                 </div>
 
-                {/* Lista de transacciones */}
                 {currentUser && (
                     <>
                         {filteredUserList.length > 0 ? (
