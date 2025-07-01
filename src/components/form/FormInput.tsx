@@ -9,6 +9,7 @@ type FormInputProps = {
     type?: string;
     wrapperHeight?: string;
     className?: string;
+    startContent?: string;
     radius?: RadiusType;
     isRequired?: boolean;
 };
@@ -19,6 +20,7 @@ export const FormInput = ({
     type = "text",
     wrapperHeight = "min-h-20",
     className,
+    startContent,
     radius,
     isRequired = false,
 }: FormInputProps) => {
@@ -42,6 +44,7 @@ export const FormInput = ({
                         className={className}
                         label={label}
                         type={type}
+                        startContent={startContent}
                         variant="bordered"
                         radius={radius}
                         classNames={{

@@ -7,6 +7,7 @@ import { useTempTransactionStore } from "@/stores/tempTransactionStore";
 import { useUserStore } from "@/stores/userStore";
 import { Avatar, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface SendAgainProps {
     amount: string;
@@ -19,11 +20,20 @@ export default function BodySendAgain() {
     const router = useRouter();
 
     const handleSubmit = (data: SendAgainProps) => {
-        setTempTransaction({
-            amount: data.amount,
-            valueTextArea: data?.valueTextArea ?? "For Food",
-        });
-        router.push("/sendAgainTwo");
+        if (Number(data.amount) > Number(localStorage.getItem("balance"))) {
+            toast("Error, insufficient amount", {
+                autoClose: 6000,
+                type: "error",
+                hideProgressBar: false,
+                position: "top-right",
+            });
+        } else {
+            setTempTransaction({
+                amount: data.amount,
+                valueTextArea: data?.valueTextArea ?? "For Food",
+            });
+            router.push("/sendAgainTwo");
+        }
     };
 
     return (
@@ -56,6 +66,7 @@ export default function BodySendAgain() {
                             name={`amount`}
                             label="Amount"
                             type="number"
+                            startContent="$"
                         />
                         <div
                             className={`flex flex-col w-full ${inter.className} font-normal text-[18px] max-h-screen`}
