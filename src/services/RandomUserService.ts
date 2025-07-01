@@ -22,6 +22,8 @@ export class RandomService implements IRandomService {
 
         const data = await response.json();
 
+        /* Este setTimeout lo puse para simular un retardo en la lista de contactos de home
+        y poder mostrar el Skeleton*/
         return new Promise<IRandomUserResponseProps>((resolve) => {
             setTimeout(() => resolve(data), 2000);
         });

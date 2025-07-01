@@ -93,7 +93,7 @@ export default function TransferList({ userList, dateBetween, onResetDates }: IT
 
     return (
         <>
-            <div className="flex flex-col gap-4 mt-4 h-[30rem] xl1:h-[41rem]">
+            <div className="flex flex-col gap-4 mt-4 h-[28rem] xl1:h-[41rem]">
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">
                         <p

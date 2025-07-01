@@ -25,7 +25,7 @@ export default function ShowData() {
                 <div className="flex gap-2 items-center justify-items-center xl1:mt-4">
                     <Avatar
                         size="md"
-                        className="xl1:w-[160px] xl1:h-[160px] w-[150px] h-[150px]"
+                        className="xl1:w-[160px] xl1:h-[160px] w-[70px] h-[70px]"
                         src={selectedContact?.picture.large}
                     />
                     <div className={`${inter.className} flex flex-col text-[16px]`}>
