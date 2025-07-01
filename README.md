@@ -1,4 +1,4 @@
-# 🧩 Challenge Técnico - [Fernando Valls]
+# 🧩 Challenge Técnico WayniWaller - [Fernando Valls]
 
 > Desarrollo de una aplicación utilizando React, Zustand, Tanstack (React Query) y Tailwind CSS.  
 > Proyecto creado con **Create Next App + TypeScript** junto a herramientas modernas para su correcta validación, controlar estados globales, consumir API's, formatear código **(Prettier)** y mejorar la calidad de código con **esLint**
