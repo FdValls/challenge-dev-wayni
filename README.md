@@ -134,3 +134,4 @@ src/
 - Profile: Muestra datos del usuario actual logueado
 - SendAgain: Valida ingreso de monto a transferir, que no supere el actual, sea numero positivo
 - Resume: Resumen exitoso de la transacción con todos los datos recopilados
+- Logout: Simula el cierre de la app, limpiando variables y haciendo un redirect a la pantalla Login
