@@ -1,7 +1,7 @@
 import { inter } from "@/config/fonts";
 import { Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
-export default function FooterSendAgainTwo() {
+export default function FooterResume() {
     const router = useRouter();
     return (
         <div className="flex flex-col gap-4 p-0 mt-8">

@@ -32,7 +32,7 @@ export default function BodySendAgain() {
                 amount: data.amount,
                 valueTextArea: data?.valueTextArea ?? "For Food",
             });
-            router.push("/sendAgainTwo");
+            router.push("/resume");
         }
     };
 

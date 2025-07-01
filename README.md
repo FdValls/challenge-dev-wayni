@@ -126,3 +126,12 @@ src/
 ├── utils/ # Helpers y utilidades
 └── wrappers/ # Protección de acceso
 ```
+
+## Pantallas y funcionlidad
+
+- Login: Ingreso de credenciales para habilitar la authenticacion
+- Home: Lista de contactos frecuentes y ultimas transacciones, al seleccionar contacto redirige con datos guardados
+- Transfer: Lista de transferencias con filtro de fecha (datos de fechas mockeados)
+- Profile: Muestra datos del usuario actual logueado
+- SendAgain: Valida ingreso de monto a transferir, que no supere el actual, sea numero positivo
+- Resume: Resumen exitoso de la transacción con todos los datos recopilados

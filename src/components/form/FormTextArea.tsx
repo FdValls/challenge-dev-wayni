@@ -21,7 +21,6 @@ export const FormTextArea = ({
     label,
     testId,
     wrapperHeight = "min-h-[133px]",
-    // wrapperHeight = "min-h-[133px]",
     className,
     radius,
     isRequired = false,

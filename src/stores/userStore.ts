@@ -60,6 +60,7 @@ export const useUserStore = create<UserState>()(
                 localStorage.removeItem("user-storage");
                 localStorage.removeItem("balance");
                 localStorage.removeItem("user-data");
+                localStorage.removeItem("listTransfer");
             },
         }),
         {
@@ -68,7 +69,6 @@ export const useUserStore = create<UserState>()(
                 currentUser: state.currentUser,
                 selectedContact: state.selectedContact,
                 users: state.users.map((user) => excludeField(user, "login")),
-                // users: state.users,
                 isAuthenticated: state.isAuthenticated,
             }),
             onRehydrateStorage: () => (state) => {

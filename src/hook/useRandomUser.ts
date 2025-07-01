@@ -1,4 +1,3 @@
-// hooks/useRandomUser.ts - Hook personalizado con TanStack Query
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useUserStore } from "../stores/userStore";

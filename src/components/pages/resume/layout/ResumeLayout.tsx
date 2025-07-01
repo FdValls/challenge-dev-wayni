@@ -1,8 +1,8 @@
 "use client";
 
-import { IMainLayoutProps } from "@/interfaces/IMainLayoutProps";
+import { IResumeProps } from "@/interfaces/IMainLayoutProps";
 
-function SendAgainTwoLayout({ bodyContent, footerContent }: IMainLayoutProps) {
+function ResumeLayout({ bodyContent, footerContent }: IResumeProps) {
     return (
         <div className="flex flex-col items-center justify-center max-h-screen p-4">
             <div className="w-[400px] h-[756px] xl1:h-[920px] bg-emerald-400 overflow-hidden ">
@@ -16,4 +16,4 @@ function SendAgainTwoLayout({ bodyContent, footerContent }: IMainLayoutProps) {
     );
 }
 
-export default SendAgainTwoLayout;
+export default ResumeLayout;
