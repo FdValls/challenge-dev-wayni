@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@/hook/useAuth";
-import { MainLayoutProps } from "@/interfaces/LayoutHomeProps";
+import { IMainLayoutProps } from "@/interfaces/IMainLayoutProps";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ function MainLayout({
     footerContent,
     expanded,
     hasFooter,
-}: MainLayoutProps) {
+}: IMainLayoutProps) {
     const { isAuthenticated, isHydrated } = useAuth();
     const router = useRouter();
 

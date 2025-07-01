@@ -1,25 +1,14 @@
 "use client";
 
 import { inter } from "@/config/fonts";
-import { SendAgainTwoProps } from "@/interfaces/SendAgainTwoProps";
 import { Avatar } from "@heroui/react";
+import { formattedDate } from "./utils/FormattedDate";
+import { useUserStore } from "@/stores/userStore";
+import { useTempTransactionStore } from "@/stores/tempTransactionStore";
 
-export default function ShowData({
-    amountTotal,
-    note,
-    lastNameUserTransfer,
-    nameUserTransfer,
-}: SendAgainTwoProps) {
-    const currentDate = new Date();
-
-    const formattedDate = currentDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-    });
-
+export default function ShowData() {
+    const { amount, valueTextArea } = useTempTransactionStore();
+    const { selectedContact } = useUserStore();
     return (
         <>
             <div className={`${inter.className} items-center justify-items-center`}>
@@ -28,7 +17,7 @@ export default function ShowData({
                     Your transacion was successfull
                 </p>
 
-                <p className={`${inter.className} font-bold text-[35px]`}>${amountTotal}</p>
+                <p className={`${inter.className} font-bold text-[35px]`}>${amount}</p>
             </div>
 
             <div className="flex flex-col items-center gap-2 mt-8">
@@ -37,11 +26,11 @@ export default function ShowData({
                     <Avatar
                         size="md"
                         className="xl1:w-[160px] xl1:h-[160px] w-[150px] h-[150px]"
-                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                        src={selectedContact?.picture.large}
                     />
                     <div className={`${inter.className} flex flex-col text-[16px]`}>
-                        <p>{nameUserTransfer}</p>
-                        <p>{lastNameUserTransfer}</p>
+                        <p>{selectedContact?.name.first}</p>
+                        <p>{selectedContact?.name.last}</p>
                     </div>
                 </div>
             </div>
@@ -50,11 +39,11 @@ export default function ShowData({
             <div className={`flex flex-col gap-4 mt-4 ${inter.className}`}>
                 <div className="flex justify-between">
                     <p className={`text-[16px] text-[#999999]`}>Payment</p>
-                    <p className={`text-[16px] font-bold text-black`}>{amountTotal}</p>
+                    <p className={`text-[16px] font-bold text-black`}>$ {amount}</p>
                 </div>
                 <div className="flex justify-between">
                     <p className={`text-[16px] text-[#999999]`}>Notes</p>
-                    <p className={`text-[16px] font-bold text-black`}>{note}</p>
+                    <p className={`text-[16px] font-bold text-black`}>{valueTextArea}</p>
                 </div>
                 <div className="flex justify-between">
                     <p className={`text-[16px] text-[#999999]`}>Date</p>

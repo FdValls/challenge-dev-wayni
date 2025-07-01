@@ -2,9 +2,11 @@
 
 import { Avatar } from "@heroui/react";
 import { inter } from "@/config/fonts";
-import { ProfileProps } from "@/interfaces/ProfileProps";
+import { useUserStore } from "@/stores/userStore";
 
-export default function ProfileData({ userList }: ProfileProps) {
+export default function ProfileData() {
+    const currentUser = useUserStore((state) => state.currentUser);
+
     return (
         <>
             <div>
@@ -15,7 +17,7 @@ export default function ProfileData({ userList }: ProfileProps) {
                     />
                     <div className="flex flex-col place-items-center gap-0">
                         <p className={`${inter.className} font-bold text-[32px]`}>
-                            {userList?.name.first}
+                            {currentUser?.name.first}
                         </p>
                     </div>
                 </div>
@@ -23,25 +25,25 @@ export default function ProfileData({ userList }: ProfileProps) {
             <div className={`flex flex-col gap-2 ${inter.className} text-[16px] mt-4`}>
                 <div className="flex justify-between">
                     <p className={`text-[#999999]`}>City</p>
-                    <p className={`font-bold text-black`}>{userList?.location.city}</p>
+                    <p className={`font-bold text-black`}>{currentUser?.location.city}</p>
                 </div>
                 <div className="flex justify-between">
                     <p className={`text-[#999999]`}>State</p>
-                    <p className={`font-bold text-black`}>{userList?.location.state}</p>
+                    <p className={`font-bold text-black`}>{currentUser?.location.state}</p>
                 </div>
                 <div className="flex justify-between">
                     <p className={`text-[#999999]`}>Street</p>
                     <p className={`font-bold text-black`}>
-                        {userList?.location.street.name} {userList?.location.street.number}
+                        {currentUser?.location.street.name} {currentUser?.location.street.number}
                     </p>
                 </div>
                 <div className="flex justify-between">
                     <p className={`text-[#999999]`}>Email</p>
-                    <p className={`font-bold text-black`}>{userList?.email}</p>
+                    <p className={`font-bold text-black`}>{currentUser?.email}</p>
                 </div>
                 <div className="flex justify-between">
                     <p className={`text-[#999999]`}>Phone</p>
-                    <p className={`font-bold text-black`}>{userList?.phone}</p>
+                    <p className={`font-bold text-black`}>{currentUser?.phone}</p>
                 </div>
             </div>
         </>

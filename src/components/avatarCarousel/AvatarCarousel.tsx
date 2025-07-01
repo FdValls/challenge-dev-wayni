@@ -1,15 +1,12 @@
-import React, { useState, SetStateAction, Dispatch } from "react";
+import React, { useState } from "react";
 import { Image, Skeleton } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import { RandomUserProps } from "@/interfaces/RandomUserProps";
+import { IRandomUserProps } from "@/interfaces/IRandomUserProps";
 import { useRandomUsers } from "@/hook/useRandomUser";
 import { inter } from "@/config/fonts";
+import { IAvatarCarouselProps } from "@/interfaces/IAvatarCarouselProps";
 
-interface AvatarCarouselProps {
-    setSelectedcontact: Dispatch<SetStateAction<RandomUserProps | undefined>>;
-}
-
-const AvatarCarousel = ({ setSelectedcontact }: AvatarCarouselProps) => {
+const AvatarCarousel = ({ setSelectedcontact }: IAvatarCarouselProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const { data, isLoading } = useRandomUsers(20);
 
@@ -60,7 +57,7 @@ const AvatarCarousel = ({ setSelectedcontact }: AvatarCarouselProps) => {
         setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
     };
 
-    const redirectToSendAgainPage = (item: RandomUserProps) => {
+    const redirectToSendAgainPage = (item: IRandomUserProps) => {
         setSelectedcontact(item);
     };
 
@@ -76,7 +73,7 @@ const AvatarCarousel = ({ setSelectedcontact }: AvatarCarouselProps) => {
                                     transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
                                 }}
                             >
-                                {data.results.map((item) => (
+                                {data.results.map((item: any) => (
                                     <div
                                         key={item.login.uuid}
                                         className="flex-shrink-0"

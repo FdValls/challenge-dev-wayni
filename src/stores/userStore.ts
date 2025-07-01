@@ -1,23 +1,24 @@
-import { RandomUserProps } from "@/interfaces/RandomUserProps";
+import { IRandomUserProps } from "@/interfaces/IRandomUserProps";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type UserState = {
-    currentUser: RandomUserProps | null;
-    users: RandomUserProps[];
-    selectedContact: RandomUserProps | null;
+    currentUser: IRandomUserProps | null;
+    users: IRandomUserProps[];
+    selectedContact: IRandomUserProps | null;
     isHydrated: boolean;
     isAuthenticated: boolean;
-    setCurrentUser: (user: RandomUserProps) => void;
-    setSelectedContact: (contact: RandomUserProps) => void;
-    setUsers: (users: RandomUserProps[]) => void;
+    setCurrentUser: (user: IRandomUserProps) => void;
+    setSelectedContact: (contact: IRandomUserProps) => void;
+    setUsers: (users: IRandomUserProps[]) => void;
     clearCurrentUser: () => void;
     setHydrated: () => void;
-    login: (username: string, password: string, userToCheck?: RandomUserProps) => boolean;
+    login: (username: string, password: string, userToCheck?: IRandomUserProps) => boolean;
     logout: () => void;
 };
 
 const excludeField = (obj: any, field: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { [field]: _, ...rest } = obj;
     return rest;
 };
@@ -35,7 +36,7 @@ export const useUserStore = create<UserState>()(
             setUsers: (users) => set({ users }),
             clearCurrentUser: () => set({ currentUser: null, isAuthenticated: false }),
             setHydrated: () => set({ isHydrated: true }),
-            login: (username: string, password: string, userToCheck?: RandomUserProps) => {
+            login: (username: string, password: string, userToCheck?: IRandomUserProps) => {
                 if (
                     userToCheck?.login.username === username &&
                     userToCheck?.login.password === password
