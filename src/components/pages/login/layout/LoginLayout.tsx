@@ -1,8 +1,8 @@
 "use client";
 
-import { IMainLayoutProps } from "@/interfaces/IMainLayoutProps";
+import { IResumeProps } from "@/interfaces/IMainLayoutProps";
 
-function LoginLayout({ headerContent, bodyContent }: IMainLayoutProps) {
+function LoginLayout({ headerContent, bodyContent }: IResumeProps) {
     return (
         <div className="flex flex-col items-center justify-center p-4 relative w-[400px] h-[756px] xl1:h-[920px] max-h-screen">
             <div className="w-full h-[270px] bg-emerald-400 overflow-hidden">

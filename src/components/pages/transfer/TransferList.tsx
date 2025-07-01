@@ -5,7 +5,7 @@ import { ITransferListProps } from "@/interfaces/ITransferListProps";
 import { useUserStore } from "@/stores/userStore";
 import { Image, Button } from "@heroui/react";
 import { format, isYesterday, isWithinInterval } from "date-fns";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function TransferList({ userList, dateBetween, onResetDates }: ITransferListProps) {
     const currentUser = useUserStore((state) => state.currentUser);
@@ -13,45 +13,60 @@ export default function TransferList({ userList, dateBetween, onResetDates }: IT
     const processedUserList = useMemo(() => {
         if (!userList) return [];
 
-        return userList.map((item) => {
-            const seed = item.login.uuid.split("").reduce((a, b) => {
-                a = (a << 5) - a + b.charCodeAt(0);
-                return a & a;
-            }, 0);
+        return userList
+            .filter((item) => item?.login?.uuid)
+            .map((item) => {
+                const seed = item.login.uuid.split("").reduce((a, b) => {
+                    a = (a << 5) - a + b.charCodeAt(0);
+                    return a & a;
+                }, 0);
 
-            const seededRandom = (min: number, max: number, offset: number = 0) => {
-                const x = Math.sin(seed + offset) * 10000;
-                return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
-            };
+                const seededRandom = (min: number, max: number, offset: number = 0) => {
+                    const x = Math.sin(seed + offset) * 10000;
+                    return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+                };
 
-            const currentYear = new Date().getFullYear();
+                const currentYear = new Date().getFullYear();
 
-            const randomDate = new Date(
-                currentYear,
-                seededRandom(0, 11, 1),
-                seededRandom(1, 28, 2),
-                seededRandom(0, 23, 3),
-                seededRandom(0, 59, 4),
-            );
+                const randomDate = new Date(
+                    currentYear,
+                    seededRandom(0, 11, 1),
+                    seededRandom(1, 28, 2),
+                    seededRandom(0, 23, 3),
+                    seededRandom(0, 59, 4),
+                );
 
-            const fechaFinal = isYesterday(randomDate)
-                ? `Yesterday · ${format(randomDate, "HH:mm")}`
-                : `${format(randomDate, "MMM d, yyyy · HH:mm")}`;
+                const fechaFinal = isYesterday(randomDate)
+                    ? `Yesterday · ${format(randomDate, "HH:mm")}`
+                    : `${format(randomDate, "MMM d, yyyy · HH:mm")}`;
 
-            const amount = seededRandom(30, 130, 5) * 1000;
+                const amount = seededRandom(30, 130, 5) * 1000;
 
-            return {
-                ...item,
-                randomDate,
-                fechaFinal,
-                amount,
-            };
-        });
+                return {
+                    ...item,
+                    randomDate,
+                    fechaFinal,
+                    amount,
+                };
+            });
     }, [userList]);
+
+    useEffect(() => {
+        if (processedUserList.length > 0) {
+            localStorage.setItem("listTransfer", JSON.stringify(processedUserList));
+        }
+    }, [processedUserList]);
+
+    const initialListFromStorage = useMemo(() => {
+        const raw = localStorage.getItem("listTransfer");
+        return raw ? JSON.parse(raw) : [];
+    }, []);
+
+    const baseList = processedUserList.length > 0 ? processedUserList : initialListFromStorage;
 
     const filteredUserList = useMemo(() => {
         if (!dateBetween || !dateBetween.start || !dateBetween.end) {
-            return processedUserList;
+            return baseList;
         }
 
         try {
@@ -69,20 +84,18 @@ export default function TransferList({ userList, dateBetween, onResetDates }: IT
                 59,
             );
 
-            return processedUserList.filter((item) => {
-                const itemDate = item.randomDate;
-                const isInRange = isWithinInterval(itemDate, { start: startDate, end: endDate });
-
-                return isInRange;
+            return baseList.filter((item: any) => {
+                const itemDate = new Date(item.randomDate);
+                return isWithinInterval(itemDate, { start: startDate, end: endDate });
             });
         } catch (error) {
             console.error("Error filtering dates:", error);
-            return processedUserList;
+            return baseList;
         }
-    }, [processedUserList, dateBetween]);
+    }, [baseList, dateBetween]);
 
     const totalAmount = useMemo(() => {
-        return filteredUserList.reduce((sum, item) => sum + item.amount, 0);
+        return filteredUserList.reduce((sum: any, item: any) => sum + item.amount, 0);
     }, [filteredUserList]);
 
     const handleResetDates = () => {
@@ -90,6 +103,9 @@ export default function TransferList({ userList, dateBetween, onResetDates }: IT
             onResetDates();
         }
     };
+
+    const displayList =
+        dateBetween && dateBetween.start && dateBetween.end ? filteredUserList : baseList;
 
     return (
         <>
@@ -122,8 +138,8 @@ export default function TransferList({ userList, dateBetween, onResetDates }: IT
 
                 {currentUser && (
                     <>
-                        {filteredUserList.length > 0 ? (
-                            filteredUserList.map((item) => (
+                        {displayList.length > 0 ? (
+                            displayList.map((item: any) => (
                                 <div key={item.login.uuid} className="flex-col gap-4">
                                     <div className="flex gap-8 items-center justify-between space-x-4">
                                         <div className="flex gap-2 items-center">
@@ -158,7 +174,9 @@ export default function TransferList({ userList, dateBetween, onResetDates }: IT
                         ) : (
                             <div className="text-center py-8">
                                 <p className={`${inter.className} text-gray-500 title-custom`}>
-                                    No transactions found for the selected date range
+                                    {!dateBetween || !dateBetween.start || !dateBetween.end
+                                        ? "No transactions available"
+                                        : "No transactions found for the selected date range"}
                                 </p>
                             </div>
                         )}

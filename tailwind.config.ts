@@ -1,4 +1,3 @@
-// tailwind.config.js
 import { heroui } from "@heroui/react";
 import type { Config } from "tailwindcss";
 import { addDynamicIconSelectors } from "@iconify/tailwind";

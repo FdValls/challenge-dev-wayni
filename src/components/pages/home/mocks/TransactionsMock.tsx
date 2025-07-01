@@ -1,5 +1,5 @@
 import { inter } from "@/config/fonts";
-import { Icon } from "@iconify/react"; // Asegurate de tener este import si lo usás
+import { Icon } from "@iconify/react";
 
 type TransactionProps = {
     id: string;

@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-export interface IMainLayoutProps {
+export interface IResumeProps {
     headerContent?: ReactNode;
     bodyContent?: ReactNode;
     footerContent?: ReactNode;
