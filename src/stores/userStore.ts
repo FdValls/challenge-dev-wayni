@@ -13,7 +13,7 @@ type UserState = {
     setUsers: (users: IRandomUserProps[]) => void;
     clearCurrentUser: () => void;
     setHydrated: () => void;
-    login: (username: string, password: string, userToCheck?: IRandomUserProps) => boolean;
+    // login: (username: string, password: string, userToCheck?: IRandomUserProps) => boolean;
     logout: () => void;
 };
 
@@ -36,19 +36,19 @@ export const useUserStore = create<UserState>()(
             setUsers: (users) => set({ users }),
             clearCurrentUser: () => set({ currentUser: null, isAuthenticated: false }),
             setHydrated: () => set({ isHydrated: true }),
-            login: (username: string, password: string, userToCheck?: IRandomUserProps) => {
-                if (
-                    userToCheck?.login.username === username &&
-                    userToCheck?.login.password === password
-                ) {
-                    set({
-                        currentUser: userToCheck,
-                        isAuthenticated: true,
-                    });
-                    return true;
-                }
-                return false;
-            },
+            // login: (username: string, password: string, userToCheck?: IRandomUserProps) => {
+            //     if (
+            //         userToCheck?.login.username === username &&
+            //         userToCheck?.login.password === password
+            //     ) {
+            //         set({
+            //             currentUser: userToCheck,
+            //             isAuthenticated: true,
+            //         });
+            //         return true;
+            //     }
+            //     return false;
+            // },
             logout: () => {
                 set({
                     currentUser: null,
@@ -72,8 +72,8 @@ export const useUserStore = create<UserState>()(
                 isAuthenticated: state.isAuthenticated,
             }),
             onRehydrateStorage: () => (state) => {
-                const user = state?.currentUser;
-                const isValid = user && user.login?.username && user.login?.password;
+                // const user = state?.currentUser;
+                const isValid = state?.isAuthenticated;
 
                 if (!isValid) {
                     state?.logout();

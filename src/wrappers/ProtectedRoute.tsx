@@ -9,8 +9,8 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     const router = useRouter();
 
     useEffect(() => {
-        if (!isLoading && !isAuthenticated) {
-            router.push("/login");
+        if (!isAuthenticated) {
+            router.push("/googleSSOLogin");
         }
     }, [isAuthenticated, isLoading, router]);
 
