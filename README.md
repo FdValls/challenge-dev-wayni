@@ -1,4 +1,4 @@
-# 🧩 Challenge Técnico - [Fernando Valls]
+# 🧩 Challenge Técnico WayniWallet - [Fernando Valls]
 
 > Desarrollo de una aplicación utilizando React, Zustand, Tanstack (React Query) y Tailwind CSS.  
 > Proyecto creado con **Create Next App + TypeScript** junto a herramientas modernas para su correcta validación, controlar estados globales, consumir API's, formatear código **(Prettier)** y mejorar la calidad de código con **esLint**
@@ -126,7 +126,6 @@ src/
 ├── utils/ # Helpers y utilidades
 └── wrappers/ # Protección de acceso
 ```
-
 ## Pantallas y funcionlidad
 
 - Login: Ingreso de credenciales para habilitar la authenticacion
@@ -135,3 +134,4 @@ src/
 - Profile: Muestra datos del usuario actual logueado
 - SendAgain: Valida ingreso de monto a transferir, que no supere el actual, sea numero positivo
 - Resume: Resumen exitoso de la transacción con todos los datos recopilados
+- Logout: Simula el cierre de la app, limpiando variables y haciendo un redirect a la pantalla Login
