@@ -1,7 +1,7 @@
-import { IRandomUserProps } from "./IRandomUserProps";
+import { IGoogleSSOProps } from "./IGoogleSSOProps";
 
 export interface ISendAgainTwoProps {
     amountTotal: string | undefined;
     note: string | undefined;
-    selectedContact: IRandomUserProps | null;
+    selectedContact: IGoogleSSOProps | null;
 }

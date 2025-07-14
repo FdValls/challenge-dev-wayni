@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { IRandomUserProps } from "./IRandomUserProps";
+import { IGoogleSSOProps } from "./IGoogleSSOProps";
 
 export interface IAvatarCarouselProps {
-    setSelectedcontact: Dispatch<SetStateAction<IRandomUserProps | undefined>>;
+    setSelectedcontact: Dispatch<SetStateAction<IGoogleSSOProps | undefined>>;
 }

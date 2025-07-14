@@ -2,14 +2,14 @@ import { inter } from "@/config/fonts";
 import { transactionsMock } from "./mocks/TransactionsMock";
 import AvatarCarousel from "@/components/avatarCarousel/AvatarCarousel";
 import { useEffect, useState } from "react";
-import { IRandomUserProps } from "@/interfaces/IRandomUserProps";
+import { IGoogleSSOProps } from "@/interfaces/IGoogleSSOProps";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/stores/userStore";
 
 export default function BodyHome() {
     const { setSelectedContact } = useUserStore();
     const router = useRouter();
-    const [selectedContact, setSelectedcontact] = useState<IRandomUserProps>();
+    const [selectedContact, setSelectedcontact] = useState<IGoogleSSOProps>();
 
     useEffect(() => {
         if (selectedContact) {

@@ -1,13 +1,9 @@
 // interfaces/IRandomUserProps.ts
-export interface IRandomUserProps {
+export interface IGoogleSSOProps {
     id: string;
     name: {
         first: string;
         last: string;
-    };
-    login?: {
-        username: string;
-        password: string;
     };
     email: string;
     picture?: string;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image, Skeleton } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import { IRandomUserProps } from "@/interfaces/IRandomUserProps";
+import { IGoogleSSOProps } from "@/interfaces/IGoogleSSOProps";
 import { useRandomUsers } from "@/hook/useRandomUser";
 import { inter } from "@/config/fonts";
 import { IAvatarCarouselProps } from "@/interfaces/IAvatarCarouselProps";
@@ -57,7 +57,7 @@ const AvatarCarousel = ({ setSelectedcontact }: IAvatarCarouselProps) => {
         setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
     };
 
-    const redirectToSendAgainPage = (item: IRandomUserProps) => {
+    const redirectToSendAgainPage = (item: IGoogleSSOProps) => {
         setSelectedcontact(item);
     };
 

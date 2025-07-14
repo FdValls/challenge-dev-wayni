@@ -1,9 +1,11 @@
-import { IRandomUserProps } from "@/interfaces/IRandomUserProps";
+import { IGoogleSSOProps } from "@/interfaces/IGoogleSSOProps";
+import { IRandomUserProps } from "@/interfaces/IRandomUserProps copy";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type UserState = {
     currentUser: IRandomUserProps | null;
+    ssoSignIn: IGoogleSSOProps | null;
     users: IRandomUserProps[];
     selectedContact: IRandomUserProps | null;
     isHydrated: boolean;
@@ -11,9 +13,10 @@ type UserState = {
     setCurrentUser: (user: IRandomUserProps) => void;
     setSelectedContact: (contact: IRandomUserProps) => void;
     setUsers: (users: IRandomUserProps[]) => void;
+    setSsoSignIn: (user: IGoogleSSOProps) => void;
     clearCurrentUser: () => void;
     setHydrated: () => void;
-    // login: (username: string, password: string, userToCheck?: IRandomUserProps) => boolean;
+    login: (username: string, password: string, userToCheck?: IRandomUserProps) => boolean;
     logout: () => void;
 };
 
@@ -27,6 +30,7 @@ export const useUserStore = create<UserState>()(
     persist(
         (set) => ({
             currentUser: null,
+            ssoSignIn: null,
             users: [],
             selectedContact: null,
             isHydrated: false,
@@ -35,20 +39,21 @@ export const useUserStore = create<UserState>()(
             setSelectedContact: (contact) => set({ selectedContact: contact }),
             setUsers: (users) => set({ users }),
             clearCurrentUser: () => set({ currentUser: null, isAuthenticated: false }),
+            setSsoSignIn: (user) => set({ ssoSignIn: user }),
             setHydrated: () => set({ isHydrated: true }),
-            // login: (username: string, password: string, userToCheck?: IRandomUserProps) => {
-            //     if (
-            //         userToCheck?.login.username === username &&
-            //         userToCheck?.login.password === password
-            //     ) {
-            //         set({
-            //             currentUser: userToCheck,
-            //             isAuthenticated: true,
-            //         });
-            //         return true;
-            //     }
-            //     return false;
-            // },
+            login: (username: string, password: string, userToCheck?: IRandomUserProps) => {
+                if (
+                    userToCheck?.login.username === username &&
+                    userToCheck?.login.password === password
+                ) {
+                    set({
+                        currentUser: userToCheck,
+                        isAuthenticated: true,
+                    });
+                    return true;
+                }
+                return false;
+            },
             logout: () => {
                 set({
                     currentUser: null,

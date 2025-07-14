@@ -12,6 +12,7 @@ import { inter } from "@/config/fonts";
 import { Button } from "@heroui/react";
 import { ILoginFormProps } from "@/interfaces/ILoginFormProps";
 import { useRandomMainUser } from "@/hook/useRandomMainUser";
+import GoogleSSOLogin from "@/app/googleSSOLogin/page";
 
 export default function Login() {
     const { isAuthenticated, isHydrated } = useAuth();
@@ -98,6 +99,9 @@ export default function Login() {
                     </Button>
                 </div>
             </GenericForm>
+            <div className="w-full my-4">
+                <GoogleSSOLogin />
+            </div>
         </div>
     );
 }

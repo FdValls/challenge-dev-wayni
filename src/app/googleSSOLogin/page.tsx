@@ -7,7 +7,7 @@ import { useUserStore } from "@/stores/userStore";
 
 export default function GoogleSSOLogin() {
     const googleButtonRef = useRef<HTMLDivElement>(null);
-    const { currentUser, setCurrentUser } = useUserStore();
+    const { setSsoSignIn } = useUserStore();
     const setAuthenticated = useUserStore.setState;
     const router = useRouter();
 
@@ -26,7 +26,7 @@ export default function GoogleSSOLogin() {
 
             console.log("User: ", user);
 
-            setCurrentUser({
+            setSsoSignIn({
                 name: { first: user.name, last: "" },
                 email: user.email,
                 picture: user.picture,
@@ -61,5 +61,5 @@ export default function GoogleSSOLogin() {
         document.body.appendChild(script);
     }, []);
 
-    return <div ref={googleButtonRef} className="flex justify-center" />;
+    return <div ref={googleButtonRef} className="w-full" />;
 }

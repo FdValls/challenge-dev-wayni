@@ -1,5 +1,5 @@
-import { IRandomUserProps } from "./IRandomUserProps";
 import { DateValue, RangeValue } from "@heroui/react";
+import { IRandomUserProps } from "./IRandomUserProps copy";
 
 export interface ITransferListProps {
     userList?: IRandomUserProps[];
