@@ -1,4 +1,4 @@
-import { IRandomUserProps } from "./IRandomUserProps";
+import { IRandomUserProps } from "./IRandomUserProps copy";
 
 export interface IRandomUserResponseProps {
     results: IRandomUserProps[];

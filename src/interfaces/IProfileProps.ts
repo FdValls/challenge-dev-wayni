@@ -1,5 +1,5 @@
-import { IRandomUserProps } from "./IRandomUserProps";
+import { IGoogleSSOProps } from "./IGoogleSSOProps";
 
 export interface IProfileProps {
-    userList?: IRandomUserProps | null;
+    userList?: IGoogleSSOProps | null;
 }

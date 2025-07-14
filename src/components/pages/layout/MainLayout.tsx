@@ -17,7 +17,8 @@ function MainLayout({
 
     useEffect(() => {
         if (isHydrated && !isAuthenticated) {
-            router.replace("/googleSSOLogin");
+            router.replace("/login");
+            // router.replace("/googleSSOLogin");
         }
     }, [isHydrated, isAuthenticated, router]);
 
